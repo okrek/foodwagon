@@ -1,0 +1,54 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/toolbar" />
+
+    <FrameLayout
+        android:id="@+id/cart_container"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="0dp" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+
+        <Button
+            style="@style/AppCompat.Button.Flat"
+            android:layout_width="0dp"
+            android:minWidth="64dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:id="@+id/button_back"
+            android:layout_gravity="center"
+            android:layout_marginLeft="16dp" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="1dp"
+            android:background="@color/product_row_button_divider"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_height="22dp"
+            android:alpha="0.12"
+            android:layout_gravity="center" />
+
+        <Button
+            style="@style/AppCompat.Button.Flat"
+            android:id="@+id/button_process"
+            android:layout_width="0dp"
+            android:minWidth="64dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginRight="16dp"
+            tools:text="@string/cart_order_process" />
+    </LinearLayout>
+</LinearLayout>

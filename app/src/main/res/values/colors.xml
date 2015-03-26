@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="color_primary">#2e2e3b</color>
+    <color name="color_primary_dark">#24242e</color>
+    <color name="color_accent">#E64A19</color>
+    <color name="color_background">#2e2e3b</color>
+    <color name="color_background_dark">#282833</color>
+
+    <!-- Toolbar -->
+    <color name="defaultToolbarIcons">#FFFFFF</color>
+
+    <!-- Drawer -->
+    <color name="drawer_background">#FFFFFF</color>
+    <color name="drawer_text_color">#000000</color>
+    <color name="drawer_item_selector">#1F000000</color>
+
+    <!-- Flat Button -->
+    <color name="flat_pressed">#E5E5E5</color>
+    <color name="flat_disabled_text">#1FFFFFFF</color>
+
+    <!-- Other -->
+    <color name="divider_black">#1F000000</color>
+    <color name="divider_white">#1FFFFFFF</color>
+    <color name="product_row_button_divider">#FFFFFF</color>
+    <color name="description_divider">#FFFFFF</color>
+    <color name="white_text">#FFFFFF</color>
+    <color name="hint_white_text">#A6FFFFFF</color>
+    <color name="badge_color_red">#CC0000</color>
+</resources>

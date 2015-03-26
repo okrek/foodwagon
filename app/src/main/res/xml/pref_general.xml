@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.cgollner.unclouded.preferences.SwitchPreferenceCompat
+        android:title="Автоматическое обновление"
+        android:defaultValue="false"
+        android:key="autoUpdate"/>
+    <com.rostrade.foodwagon.foodwagon.utility.CustomListPreference
+        android:negativeButtonText="@string/cancel"
+        android:title="Начальный экран"
+        android:key="defaultCategory"
+        android:summary="%s"
+        android:defaultValue="20"/>
+    <Preference
+        android:key="clearFavorites"
+        android:title="Очистить избранное"/>
+</PreferenceScreen>

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@drawable/divider_white"
+            android:orientation="vertical"
+            android:showDividers="middle">
+
+            <LinearLayout
+                android:id="@+id/contacts_call"
+                android:layout_width="match_parent"
+                android:layout_height="72dp"
+                android:background="@drawable/drawer_list_item_selector"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <ImageButton
+                    android:id="@+id/call"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/ic_action_call"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/phone_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingLeft="32dp"
+                    android:paddingRight="16dp"
+                    android:textColor="@color/white_text"
+                    android:textSize="16dp"
+                    tools:text="+7 (123) 456-78-90" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/contacts_map"
+                android:layout_width="match_parent"
+                android:layout_height="72dp"
+                android:background="@drawable/drawer_list_item_selector"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <ImageButton
+                    android:id="@+id/address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/ic_action_location_on"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/address_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingLeft="32dp"
+                    android:textColor="@color/white_text"
+                    android:textSize="16dp"
+                    tools:text="пр.Фурманова 23" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/contacts_web"
+                android:layout_width="match_parent"
+                android:layout_height="72dp"
+                android:background="@drawable/drawer_list_item_selector"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <ImageButton
+                    android:id="@+id/web"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/ic_action_open_in_browser"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/company_url"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingLeft="32dp"
+                    android:textColor="@color/white_text"
+                    android:textSize="16dp"
+                    tools:text="http://foodwagon.ru" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/contacts_email"
+                android:layout_width="match_parent"
+                android:layout_height="72dp"
+                android:background="@drawable/drawer_list_item_selector"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <ImageButton
+                    android:id="@+id/mail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/ic_action_email"
+                    tools:ignore="ContentDescription"/>
+
+                <TextView
+                    android:id="@+id/mail_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingLeft="32dp"
+                    android:textColor="@color/white_text"
+                    android:textSize="16dp"
+                    tools:text="fw@foodwagon.ru" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="@drawable/shadow" />
+    </FrameLayout>
+</LinearLayout>

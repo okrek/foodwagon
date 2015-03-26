@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="48dp"
+    android:orientation="horizontal"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
+
+    <LinearLayout
+        android:id="@+id/details_handler"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1.1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/cart_item_name"
+            android:layout_height="0dp"
+            android:layout_width="wrap_content"
+            android:layout_weight="1.1"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:paddingRight="16dp"
+            android:textColor="@color/white_text"
+            android:textSize="16dp"
+            android:maxLines="2"
+            tools:text="Филадельфия" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:textSize="12dp"
+            android:id="@+id/cart_item_modification"
+            tools:text="Толстое тесто" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/cart_item_quantity"
+        android:layout_height="24dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_width="24dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:background="@drawable/edit_text_background"
+        android:textColor="@color/white_text"
+        android:textColorHighlight="@color/color_primary"
+        android:textSize="14dp"
+        android:maxLength="2"
+        android:lines="1"
+        android:selectAllOnFocus="true"
+        android:inputType="number"
+        android:digits="0123456789"
+        android:cursorVisible="false"
+        android:imeOptions="actionDone"
+        tools:text="5" />
+
+    <TextView
+        android:id="@+id/cart_item_price"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5"
+        android:layout_gravity="center_vertical"
+        android:gravity="center"
+        android:paddingRight="16dp"
+        android:textColor="@color/white_text"
+        android:textSize="16dp"
+        tools:text="1240" />
+
+    <ImageButton
+        android:id="@+id/cart_button_remove"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:background="@android:color/transparent"
+        android:src="@drawable/abc_ic_clear_mtrl_alpha"
+        tools:ignore="ContentDescription" />
+</LinearLayout>

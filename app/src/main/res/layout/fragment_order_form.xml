@@ -1,0 +1,153 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/customer_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="8dp"
+            android:singleLine="true"
+            android:hint="@string/order_name"
+            android:textSize="@dimen/edittext_text_size"
+            app:floatingLabel="highlight"
+            app:primaryColor="@color/color_accent" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/customer_lastname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:singleLine="true"
+            android:hint="@string/customer_surname"
+            android:textSize="@dimen/edittext_text_size"
+            app:floatingLabel="highlight"
+            app:primaryColor="@color/color_accent" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/customer_phone_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:singleLine="true"
+            android:layout_marginRight="16dp"
+            android:digits="0123456789()+- "
+            android:hint="@string/customer_phone"
+            android:textSize="@dimen/edittext_text_size"
+            android:inputType="phone"
+            app:floatingLabel="highlight"
+            app:primaryColor="@color/color_accent" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/customer_street"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:singleLine="true"
+            android:hint="@string/customer_street"
+            android:textSize="@dimen/edittext_text_size"
+            app:floatingLabel="highlight"
+            app:primaryColor="@color/color_accent" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/customer_house_number"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:singleLine="true"
+                android:layout_weight="1"
+                android:hint="@string/customer_home_number"
+                android:textSize="@dimen/edittext_text_size"
+                android:imeOptions="actionNext"
+                app:floatingLabel="highlight"
+                app:primaryColor="@color/color_accent" />
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/customer_flat_number"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_weight="1"
+                android:hint="@string/customer_flat_number"
+                android:textSize="@dimen/edittext_text_size"
+                android:imeOptions="actionNext"
+                android:singleLine="true"
+                app:floatingLabel="highlight"
+                app:primaryColor="@color/color_accent" />
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/customer_intercom"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:singleLine="true"
+                android:layout_weight="1"
+                android:hint="@string/customer_intercom"
+                android:textSize="@dimen/edittext_text_size"
+                android:imeOptions="actionNext"
+                app:floatingLabel="highlight"
+                app:primaryColor="@color/color_accent" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/persons_count"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:inputType="number"
+                android:singleLine="true"
+                android:hint="@string/persons_count"
+                android:textSize="@dimen/edittext_text_size"
+                app:floatingLabel="highlight"
+                app:primaryColor="@color/color_accent" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="16dp"
+                android:text="@string/has_birthday"
+                android:textSize="@dimen/edittext_text_size"
+                android:textColor="@color/checkbox_selector"
+                android:id="@+id/birthday" />
+
+        </LinearLayout>
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/promo_card_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:singleLine="true"
+            android:hint="@string/promo_card_number"
+            android:inputType="number"
+            android:textSize="@dimen/edittext_text_size"
+            app:floatingLabel="highlight"
+            app:primaryColor="@color/color_accent" />
+    </LinearLayout>
+</ScrollView>

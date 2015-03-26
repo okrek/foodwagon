@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="8dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/cart_horizontal_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:orientation="horizontal"
+        android:background="@color/divider_white" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:orientation="horizontal"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp">
+
+        <com.rostrade.foodwagon.foodwagon.ui.RobotoTextView
+            android:id="@+id/total"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.1"
+            android:layout_width="0dp"
+            android:layout_gravity="center_vertical"
+            android:text="@string/total"
+            android:textColor="@android:color/white"
+            android:textSize="16dp" />
+
+        <TextView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:layout_marginRight="16dp"
+            android:layout_marginEnd="16dp"
+            android:gravity="center"
+            android:background="@drawable/edit_text_background"
+            android:visibility="invisible" />
+
+        <com.rostrade.foodwagon.foodwagon.ui.RobotoTextView
+            android:id="@+id/cart_total"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:paddingRight="16dp"
+            android:textColor="@color/white_text"
+            android:textSize="16dp"
+            tools:text="666Р." />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@android:color/transparent"
+            android:src="@drawable/abc_ic_clear_mtrl_alpha"
+            android:visibility="invisible"
+            tools:ignore="ContentDescription" />
+    </LinearLayout>
+</LinearLayout>
