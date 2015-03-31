@@ -33,13 +33,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + DataContract.ProductEntry.KEY_DESCRIPTION + " TEXT NOT NULL,"
                 + DataContract.ProductEntry.KEY_CATEGORY_ID + " INTEGER NOT NULL, "
                 + DataContract.ProductEntry.KEY_IMAGE_URL + " TEXT NOT NULL, "
-                + DataContract.ProductEntry.KEY_MODIFICATIONS + " TEXT, "
-                + DataContract.ProductEntry.KEY_FAVORITE + " NUMERIC NOT NULL DEFAULT 0)";
+                + DataContract.ProductEntry.KEY_MODIFICATIONS + " TEXT)";
 
         final String ORDER_SQL_QUERY = "CREATE TABLE " + DataContract.OrderEntry.TABLE_CART + " ("
                 + DataContract.OrderEntry.ID + " INTEGER, "
                 + DataContract.OrderEntry.MODIFICATION_ID + " INTEGER, "
                 + DataContract.OrderEntry.QUANTITY + " INTEGER DEFAULT 0)";
+
+        final String FAVORITES_SQL_QUERY = "CREATE TABLE "
+                + DataContract.FavoriteEntry.TABLE_FAVORITES + " ("
+                + DataContract.FavoriteEntry.ID + " INTEGER PRIMARY KEY)";
 
         final String CATEGORY_SQL_QUERY = "CREATE TABLE "
                 + DataContract.CategoryEntry.TABLE_CATEGORIES + " ("
@@ -48,6 +51,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         db.execSQL(PRODUCTS_SQL_QUERY);
         db.execSQL(CATEGORY_SQL_QUERY);
+        db.execSQL(FAVORITES_SQL_QUERY);
         db.execSQL(ORDER_SQL_QUERY);
     }
 

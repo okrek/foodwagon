@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+// TODO: restyle toolbar, add onDismiss in splashScreenActivity
 public class MainActivity extends ActionBarActivity {
 
     private View.OnClickListener mDrawerClickListener;
@@ -91,7 +92,7 @@ public class MainActivity extends ActionBarActivity {
                 }
 
                 if (category == BasicCategory.FAVORITES) {
-                    mMainAdapter.setProducts(mProductManager.getProductsInCategory("-1"));
+                    mMainAdapter.setProducts(mProductManager.getFavorites());
                     mDrawerLayout.closeDrawer(GravityCompat.START);
                 } else if (category == BasicCategory.CART) {
                     startActivity(new Intent(MainActivity.this, CartActivity.class));

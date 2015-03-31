@@ -124,7 +124,7 @@ public class DialogManager {
         }
 
         final ImageButton imageButton = (ImageButton) view.findViewById(R.id.dialog_favorite);
-        if (product.isFavorite() == Product.FAVORITE) imageButton.setSelected(true);
+        if (product.isFavorite()) imageButton.setSelected(true);
         else imageButton.setSelected(false);
 
         Picasso.with(context).load(mUtility.getProductImage(product))
@@ -135,7 +135,7 @@ public class DialogManager {
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (product.isFavorite() == Product.FAVORITE) {
+                if (product.isFavorite()) {
                     imageButton.setSelected(false);
                     product.favoriteToggle();
                     mProductManager.updateFavorites(product);

@@ -1,20 +1,15 @@
 <resources>
-    <style name="divider">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">1dp</item>
-        <item name="android:background">?android:attr/listDivider</item>
-    </style>
-
     <style name="PreferenceScreen" parent="AppTheme.Base">
         <item name="android:textColor">@color/white_text</item>
     </style>
 
     <style name="CustomPopupMenu" parent="Base.ThemeOverlay.AppCompat.Dark">
         <item name="android:background">@color/color_background</item>
+        <item name="android:drawSelectorOnTop">true</item>
     </style>
 
     <style name="CustomToolbar" parent="Base.ThemeOverlay.AppCompat.Dark">
-        <item name="android:textColorSecondary">#FFFFFF</item>
+        <item name="android:textColorSecondary">@color/white_text</item>
     </style>
 
     <style name="AppCompat.Button.Flat" parent="Base.TextAppearance.AppCompat.Button">
@@ -29,10 +24,5 @@
         <item name="android:paddingRight">@dimen/btn_flat_padding</item>
         <item name="android:layout_marginLeft">@dimen/btn_flat_margin</item>
         <item name="android:layout_marginRight">@dimen/btn_flat_margin</item>
-    </style>
-
-    <style name="TextAppearance.YourApp.FloatLabel" parent="android:TextAppearance.Small">
-        <item name="android:textColor">@color/color_accent</item>
-        <item name="android:textSize">12sp</item>
     </style>
 </resources>

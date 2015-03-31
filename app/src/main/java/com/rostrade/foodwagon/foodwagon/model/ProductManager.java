@@ -87,16 +87,8 @@ public class ProductManager {
 
     /**
      * @return list of products for given {@param category_id}
-     * returns favorite products, if {@param category_id} equals -1
      */
     public List<Product> getProductsInCategory(String category_id) {
-        if (category_id.equals("-1")) {
-            mCurrentSelectedCategory.set(-1);
-            Cursor cursor = mDatabase.query(ProductEntry.TABLE_PRODUCTS, null,
-                    ProductEntry.KEY_FAVORITE + "=1", null, null, null, null);
-            return getProductsFromCursor(cursor);
-        }
-
         Cursor cursor = mDatabase.query(ProductEntry.TABLE_PRODUCTS, null,
                 ProductEntry.KEY_CATEGORY_ID + "=" + category_id, null, null, null, null);
 
@@ -106,10 +98,30 @@ public class ProductManager {
         return products;
     }
 
+    public List<Product> getFavorites() {
+        List<Product> favoritesList = new ArrayList<>();
+        Cursor cursor = mDatabase.query(FavoriteEntry.TABLE_FAVORITES, null,
+                null, null, null, null, null);
+        cursor.moveToFirst();
+
+        for (int i = 0; i < cursor.getCount(); i++) {
+            String productId = cursor.getString(cursor.getColumnIndex(FavoriteEntry.ID));
+            Product currentProduct = getProductById(productId);
+            if (currentProduct != null) {
+                favoritesList.add(currentProduct);
+            } else {
+                mDatabase.delete(FavoriteEntry.TABLE_FAVORITES,
+                        FavoriteEntry.ID + "=" + productId, null);
+            }
+
+            cursor.moveToNext();
+        }
+
+        return favoritesList;
+    }
+
     public void clearFavorites() {
-        mDatabase.execSQL("UPDATE " + ProductEntry.TABLE_PRODUCTS
-                + " SET " + ProductEntry.KEY_FAVORITE
-                + "=0" + " WHERE " + ProductEntry.KEY_FAVORITE + ">0");
+        mDatabase.execSQL("DELETE FROM " + FavoriteEntry.TABLE_FAVORITES);
     }
 
     public Order getOrderFromDb() {
@@ -120,20 +132,26 @@ public class ProductManager {
         Order order = new Order();
 
         for (int i = 0; i < cursor.getCount(); i++) {
-            String id = cursor.getString(cursor.getColumnIndex(OrderEntry.ID));
+            String productId = cursor.getString(cursor.getColumnIndex(OrderEntry.ID));
             int quantity = cursor.getInt(cursor.getColumnIndex(OrderEntry.QUANTITY));
             String modId = cursor.getString(cursor.getColumnIndex(OrderEntry.MODIFICATION_ID));
 
-            Product currentProduct = getProductById(id);
+            Product currentProduct = getProductById(productId);
 
-            if (modId != null) {
-                Modification selectedModification = currentProduct.getModificationById(modId);
-                currentProduct.setPrice(selectedModification.getModPrice() + "");
-                currentProduct.setWeight(selectedModification.getModWeight());
-                currentProduct.setSelectedModification(selectedModification);
+            if (currentProduct != null) {
+                if (modId != null) {
+                    Modification selectedModification = currentProduct.getModificationById(modId);
+                    currentProduct.setPrice(selectedModification.getModPrice() + "");
+                    currentProduct.setWeight(selectedModification.getModWeight());
+                    currentProduct.setSelectedModification(selectedModification);
+                }
+
+                order.addItem(currentProduct, quantity);
+            } else {
+                String sql = "DELETE FROM " + OrderEntry.TABLE_CART + " WHERE "
+                        + OrderEntry.ID + "=" + productId;
+                mDatabase.execSQL(sql);
             }
-
-            order.addItem(currentProduct, quantity);
             cursor.moveToNext();
         }
 
@@ -147,7 +165,7 @@ public class ProductManager {
 
 
     public void updateDB(List<Product> products) {
-
+        // TODO: clear products table on update,
         for (Product product : products) {
             ContentValues values = new ContentValues();
             values.put(ProductEntry.KEY_ID, product.getId());
@@ -178,10 +196,8 @@ public class ProductManager {
                 }
                 values.put(ProductEntry.KEY_MODIFICATIONS, modificationsArray.toString());
             }
-            mDatabase.updateWithOnConflict(ProductEntry.TABLE_PRODUCTS, values,
-                    "_id = " + product.getId(), null, SQLiteDatabase.CONFLICT_REPLACE);
             mDatabase.insertWithOnConflict(ProductEntry.TABLE_PRODUCTS, null,
-                    values, SQLiteDatabase.CONFLICT_IGNORE);
+                    values, SQLiteDatabase.CONFLICT_REPLACE);
         }
 
     }
@@ -196,9 +212,16 @@ public class ProductManager {
     }
 
     public void updateFavorites(Product product) {
-        mDatabase.execSQL("UPDATE " + ProductEntry.TABLE_PRODUCTS
-                + " SET in_favorites_list = " + product.isFavorite()
-                + " WHERE _id = " + product.getId());
+        ContentValues values = new ContentValues();
+        values.put(FavoriteEntry.ID, product.getId());
+        if (product.isFavorite()) {
+            mDatabase.insertWithOnConflict(FavoriteEntry.TABLE_FAVORITES, null,
+                    values, SQLiteDatabase.CONFLICT_IGNORE);
+        } else {
+            mDatabase.delete(FavoriteEntry.TABLE_FAVORITES,
+                    FavoriteEntry.ID + "=" + product.getId(), null);
+        }
+
     }
 
     public void setOrderItemQuantity(Order order, Product product, String quantity) {
@@ -282,54 +305,63 @@ public class ProductManager {
         cursor.moveToFirst();
         List<Product> products = new ArrayList<>();
 
-        for (int i = 0; i < cursor.getCount(); i++) {
-            Product product = new Product();
-            product.setId(cursor.getString(
-                    cursor.getColumnIndex(ProductEntry.KEY_ID)));
-            product.setCategory(cursor.getString(
-                    cursor.getColumnIndex(ProductEntry.KEY_CATEGORY_ID)));
-            product.setFavorite(Integer.parseInt(
-                    cursor.getString(cursor.getColumnIndex(ProductEntry.KEY_FAVORITE))));
-            product.setImageUrl(cursor.getString(
-                    cursor.getColumnIndex(ProductEntry.KEY_IMAGE_URL)));
-            product.setName(cursor.getString(
-                    cursor.getColumnIndex(ProductEntry.KEY_NAME)));
-            product.setPrice(cursor.getString(
-                    cursor.getColumnIndex(ProductEntry.KEY_PRICE)));
-            product.setDescription(cursor.getString(
-                    cursor.getColumnIndex(ProductEntry.KEY_DESCRIPTION)));
-            product.setWeight(cursor.getString(
-                    cursor.getColumnIndex(ProductEntry.KEY_WEIGHT)));
+        if (cursor.getCount() > 0) {
+            for (int i = 0; i < cursor.getCount(); i++) {
+                Product product = new Product();
+                product.setId(cursor.getString(
+                        cursor.getColumnIndex(ProductEntry.KEY_ID)));
+                product.setCategory(cursor.getString(
+                        cursor.getColumnIndex(ProductEntry.KEY_CATEGORY_ID)));
+                product.setFavorite(isFavorite(product));
+                product.setImageUrl(cursor.getString(
+                        cursor.getColumnIndex(ProductEntry.KEY_IMAGE_URL)));
+                product.setName(cursor.getString(
+                        cursor.getColumnIndex(ProductEntry.KEY_NAME)));
+                product.setPrice(cursor.getString(
+                        cursor.getColumnIndex(ProductEntry.KEY_PRICE)));
+                product.setDescription(cursor.getString(
+                        cursor.getColumnIndex(ProductEntry.KEY_DESCRIPTION)));
+                product.setWeight(cursor.getString(
+                        cursor.getColumnIndex(ProductEntry.KEY_WEIGHT)));
 
-            String modifications = cursor.getString(
-                    cursor.getColumnIndex(ProductEntry.KEY_MODIFICATIONS));
+                String modifications = cursor.getString(
+                        cursor.getColumnIndex(ProductEntry.KEY_MODIFICATIONS));
 
-            if (modifications != null) {
-                List<Modification> modificationList = new ArrayList<>();
-                try {
-                    JSONArray modArray = new JSONArray(modifications);
-                    for (int j = 0; j < modArray.length(); j++) {
-                        JSONObject mod = modArray.getJSONObject(j);
-                        Modification currentModification = new Modification();
-                        currentModification.setModValue(mod.getString("value"));
-                        currentModification.setModId(mod.getString("id"));
-                        currentModification.setModWeight(mod.getString("weight"));
-                        currentModification.setModName(mod.getString("name"));
-                        currentModification.setModPrice(mod.getInt("price"));
-                        modificationList.add(currentModification);
+                if (modifications != null) {
+                    List<Modification> modificationList = new ArrayList<>();
+                    try {
+                        JSONArray modArray = new JSONArray(modifications);
+                        for (int j = 0; j < modArray.length(); j++) {
+                            JSONObject mod = modArray.getJSONObject(j);
+                            Modification currentModification = new Modification();
+                            currentModification.setModValue(mod.getString("value"));
+                            currentModification.setModId(mod.getString("id"));
+                            currentModification.setModWeight(mod.getString("weight"));
+                            currentModification.setModName(mod.getString("name"));
+                            currentModification.setModPrice(mod.getInt("price"));
+                            modificationList.add(currentModification);
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                    product.setModifications(modificationList);
                 }
-                product.setModifications(modificationList);
-            }
 
-            products.add(product);
-            cursor.moveToNext();
+                products.add(product);
+                cursor.moveToNext();
+            }
         }
         cursor.close();
 
         return products;
+    }
+
+    private boolean isFavorite(Product product) {
+        Cursor cursor = mDatabase.query(FavoriteEntry.TABLE_FAVORITES, null,
+                FavoriteEntry.ID + "=" + product.getId(), null, null, null, null);
+
+        if (cursor.getCount() != 0) return true;
+        return false;
     }
 
     public void clearCart() {

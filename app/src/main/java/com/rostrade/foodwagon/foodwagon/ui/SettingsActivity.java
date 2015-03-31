@@ -19,6 +19,9 @@ import java.util.List;
 
 public class SettingsActivity extends ActionBarActivity{
 
+    public static final String DEFAULT_CATEGORY = "defaultCategory";
+    public static final String CLEAR_FAVORITES = "clearFavorites";
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,7 +69,7 @@ public class SettingsActivity extends ActionBarActivity{
             addPreferencesFromResource(R.xml.pref_general);
             mProductManager = ProductManager.getInstance(getActivity());
 
-            mClearFavsPreference = findPreference("clearFavorites");
+            mClearFavsPreference = findPreference(CLEAR_FAVORITES);
             mClearFavsPreference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
@@ -75,7 +78,7 @@ public class SettingsActivity extends ActionBarActivity{
                 }
             });
 
-            mListPreference = (ListPreference) findPreference("defaultCategory");
+            mListPreference = (ListPreference) findPreference(DEFAULT_CATEGORY);
             List<Category> categories = mProductManager.getDynamicCategories();
             categories.add(0, BasicCategory.FAVORITES);
 
@@ -95,7 +98,7 @@ public class SettingsActivity extends ActionBarActivity{
         public boolean onPreferenceChange(Preference preference, Object newValue) {
 
             switch (preference.getKey()) {
-                case "defaultCategories":
+                case DEFAULT_CATEGORY:
                     int position = mListPreference.findIndexOfValue((String) newValue);
                     mListPreference.setSummary(mEntries[position]);
                     break;

@@ -7,9 +7,6 @@ import java.util.List;
 
 public class Product implements Comparable<Product> {
 
-    public static final int FAVORITE = 1;
-    public static final int NOT_FAVORITE = 0;
-
     private String mName;
     private String mDescription;
     private String mImageUrl;
@@ -17,7 +14,7 @@ public class Product implements Comparable<Product> {
     private String mWeight;
     private String mId;
     private String mCategory;
-    private int mFavoriteState = NOT_FAVORITE;
+    private boolean mIsFavorite = false;
     private List<Modification> modifications;
     private Modification selectedModification;
 
@@ -25,7 +22,7 @@ public class Product implements Comparable<Product> {
      * Toggles favorite state on call
      */
     public void favoriteToggle() {
-        setFavorite((isFavorite() == NOT_FAVORITE) ? FAVORITE : NOT_FAVORITE);
+        setFavorite(isFavorite() ? false : true);
     }
 
     @Override
@@ -131,12 +128,12 @@ public class Product implements Comparable<Product> {
         return mCategory;
     }
 
-    public int isFavorite() {
-        return mFavoriteState;
+    public boolean isFavorite() {
+        return mIsFavorite;
     }
 
-    public void setFavorite(int mIsFavorite) {
-        this.mFavoriteState = mIsFavorite;
+    public void setFavorite(boolean isFavorite) {
+        this.mIsFavorite = isFavorite;
     }
 
     @Override

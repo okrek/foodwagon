@@ -5,7 +5,7 @@ public enum BasicCategory implements Category {
     FAVORITES("Избранное", -1),
     CONTACTS("Контакты", -1),
     SETTINGS("Настройки", -1),
-    PROMOS("Акции", -1);
+    PROMOS("Акции", -1); // Have not implemented in server-side API yet
 
     private final String name;
     private final int id;

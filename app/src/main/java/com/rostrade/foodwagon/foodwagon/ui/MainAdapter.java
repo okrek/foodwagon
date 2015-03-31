@@ -29,7 +29,7 @@ import java.util.concurrent.Executors;
 
 public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
-    private BadgeChangeListener badgeChangeListener;
+    private BadgeChangeListener mBadgeChangeListener;
     private LinearLayoutManager mLayoutManager;
     private ProductManager mProductManager;
     private List<Product> mProducts;
@@ -109,7 +109,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
     }
 
     public void setBadgeChangeListener(BadgeChangeListener badgeChangeListener) {
-        this.badgeChangeListener = badgeChangeListener;
+        this.mBadgeChangeListener = badgeChangeListener;
     }
 
     public void setLayoutManager(LinearLayoutManager layoutManager) {
@@ -154,7 +154,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
                                 .showModificationsDialog(mContext, currentProduct);
                     } else {
                         mProductManager.addToCart(currentProduct);
-                        badgeChangeListener.notifyBadge();
+                        mBadgeChangeListener.notifyBadge();
                     }
                     break;
                 case R.id.product_image:

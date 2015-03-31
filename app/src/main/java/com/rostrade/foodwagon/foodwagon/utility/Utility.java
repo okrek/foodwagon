@@ -11,6 +11,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.rostrade.foodwagon.foodwagon.data.DataContract;
+import com.rostrade.foodwagon.foodwagon.data.DatabaseHelper;
 import com.rostrade.foodwagon.foodwagon.ui.RoubleSpan;
 import com.rostrade.foodwagon.foodwagon.model.Category;
 import com.rostrade.foodwagon.foodwagon.model.DynamicCategory;
@@ -75,8 +77,9 @@ public final class Utility {
                 if (params.length < 2) {
                     mSyncListener.onTaskStarted(response.length());
                     parseCategories(response);
+                    DatabaseHelper.getInstance(mContext).getWritableDatabase().execSQL(
+                            "DELETE FROM " + DataContract.ProductEntry.TABLE_PRODUCTS);
                 } else {
-                    VolleyLog.v(params[1], response);
                     new AsyncTask<JSONObject, Void, Void>() {
                         @Override
                         protected Void doInBackground(JSONObject... params) {
