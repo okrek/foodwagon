@@ -1,4 +1,4 @@
-package com.rostrade.foodwagon.foodwagon.view;
+package com.rostrade.foodwagon.foodwagon.utils;
 
 import android.content.Context;
 import android.graphics.Typeface;

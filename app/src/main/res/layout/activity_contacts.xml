@@ -47,7 +47,7 @@
                     android:paddingRight="16dp"
                     android:textColor="@color/white_text"
                     android:textSize="16dp"
-                    tools:text="+7 (123) 456-78-90" />
+                    android:text="@string/company_phone_number" />
             </LinearLayout>
 
             <LinearLayout
@@ -75,7 +75,7 @@
                     android:paddingLeft="32dp"
                     android:textColor="@color/white_text"
                     android:textSize="16dp"
-                    tools:text="пр.Фурманова 23" />
+                    android:text="@string/company_address" />
             </LinearLayout>
 
             <LinearLayout
@@ -103,7 +103,7 @@
                     android:paddingLeft="32dp"
                     android:textColor="@color/white_text"
                     android:textSize="16dp"
-                    tools:text="http://foodwagon.ru" />
+                    android:text="@string/company_url" />
             </LinearLayout>
 
             <LinearLayout
@@ -131,7 +131,7 @@
                     android:paddingLeft="32dp"
                     android:textColor="@color/white_text"
                     android:textSize="16dp"
-                    tools:text="fw@foodwagon.ru" />
+                    android:text="@string/company_email" />
             </LinearLayout>
 
         </LinearLayout>

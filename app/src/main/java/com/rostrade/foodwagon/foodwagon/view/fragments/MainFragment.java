@@ -1,4 +1,4 @@
-package com.rostrade.foodwagon.foodwagon.view;
+package com.rostrade.foodwagon.foodwagon.view.fragments;
 
 import android.app.Fragment;
 import android.content.Context;
@@ -19,6 +19,7 @@ import com.rostrade.foodwagon.foodwagon.R;
 import com.rostrade.foodwagon.foodwagon.model.Product;
 import com.rostrade.foodwagon.foodwagon.presenter.IProductListPresenter;
 import com.rostrade.foodwagon.foodwagon.presenter.impl.ProductListPresenter;
+import com.rostrade.foodwagon.foodwagon.view.IProductListView;
 import com.rostrade.foodwagon.foodwagon.view.adapters.ProductListAdapter;
 
 import java.util.ArrayList;

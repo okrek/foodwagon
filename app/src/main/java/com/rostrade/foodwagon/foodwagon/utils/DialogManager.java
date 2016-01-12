@@ -1,4 +1,4 @@
-package com.rostrade.foodwagon.foodwagon.view;
+package com.rostrade.foodwagon.foodwagon.utils;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -14,7 +14,8 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.rostrade.foodwagon.foodwagon.R;
 import com.rostrade.foodwagon.foodwagon.model.Cart;
 import com.rostrade.foodwagon.foodwagon.model.Product;
-import com.rostrade.foodwagon.foodwagon.utility.Utility;
+import com.rostrade.foodwagon.foodwagon.view.activities.CartActivity;
+import com.rostrade.foodwagon.foodwagon.view.activities.DrawerActivity;
 import com.squareup.picasso.Picasso;
 
 public class DialogManager {

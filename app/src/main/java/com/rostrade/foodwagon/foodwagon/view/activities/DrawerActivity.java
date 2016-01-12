@@ -1,4 +1,4 @@
-package com.rostrade.foodwagon.foodwagon.view;
+package com.rostrade.foodwagon.foodwagon.view.activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -18,7 +18,8 @@ import com.rostrade.foodwagon.foodwagon.model.NavigationCategory;
 import com.rostrade.foodwagon.foodwagon.model.Category;
 import com.rostrade.foodwagon.foodwagon.presenter.IDrawerPresenter;
 import com.rostrade.foodwagon.foodwagon.presenter.impl.DrawerPresenter;
-import com.rostrade.foodwagon.foodwagon.view.activities.BaseActivity;
+import com.rostrade.foodwagon.foodwagon.view.IDrawerActivityView;
+import com.rostrade.foodwagon.foodwagon.view.fragments.MainFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +51,26 @@ public class DrawerActivity extends BaseActivity implements IDrawerActivityView 
 
         setSupportActionBar(toolbar);
         presenter = new DrawerPresenter(this);
-        presenter.onCreate();
+        presenter.onDrawerRequested();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(final Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+
+        View cartItem = menu.findItem(R.id.action_cart).getActionView();
+        mBasketBadge = (TextView) cartItem.findViewById(R.id.menu_badge_text);
+
+        cartItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.onCartClicked();
+            }
+        });
+
+        presenter.onMenuInflated();
+
+        return true;
     }
 
     @Override
@@ -75,28 +95,6 @@ public class DrawerActivity extends BaseActivity implements IDrawerActivityView 
     @Override
     public void selectDrawerItemForCategory(Category category) {
         mDrawer.setSelection(mDrawer.getDrawerItem(category));
-    }
-
-    private ArrayList<IDrawerItem> getDrawerItems(List<Category> categories) {
-        ArrayList<IDrawerItem> drawerItems = new ArrayList<>();
-
-        for (NavigationCategory navigationCategory : NavigationCategory.values()) {
-            drawerItems.add(new PrimaryDrawerItem()
-                    .withIcon(navigationCategory.getId())
-                    .withName(navigationCategory.getName())
-                    .withTag(navigationCategory));
-        }
-
-        drawerItems.add(new DividerDrawerItem());
-
-        for (Category category : categories) {
-            drawerItems.add(new PrimaryDrawerItem()
-                    .withIcon(R.drawable.ic_action_brightness_1_grey600)
-                    .withName(category.getName())
-                    .withTag(category));
-        }
-
-        return drawerItems;
     }
 
     @Override
@@ -132,23 +130,26 @@ public class DrawerActivity extends BaseActivity implements IDrawerActivityView 
         return getApplicationContext();
     }
 
+    private ArrayList<IDrawerItem> getDrawerItems(List<Category> categories) {
+        ArrayList<IDrawerItem> drawerItems = new ArrayList<>();
 
-    @Override
-    public boolean onCreateOptionsMenu(final Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        for (NavigationCategory navigationCategory : NavigationCategory.values()) {
+            drawerItems.add(new PrimaryDrawerItem()
+                    .withIcon(navigationCategory.getId())
+                    .withName(navigationCategory.getName())
+                    .withTag(navigationCategory));
+        }
 
-        View cartItem = menu.findItem(R.id.action_cart).getActionView();
-        mBasketBadge = (TextView) cartItem.findViewById(R.id.menu_badge_text);
+        drawerItems.add(new DividerDrawerItem());
 
-        cartItem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                presenter.onCartClicked();
-            }
-        });
+        for (Category category : categories) {
+            drawerItems.add(new PrimaryDrawerItem()
+                    .withIcon(R.drawable.ic_action_brightness_1_grey600)
+                    .withName(category.getName())
+                    .withTag(category));
+        }
 
-        presenter.onMenuInflated();
-
-        return true;
+        return drawerItems;
     }
+
 }

@@ -1,7 +1,6 @@
 package com.rostrade.foodwagon.foodwagon.view.adapters;
 
 import android.content.Context;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,9 +12,9 @@ import android.widget.TextView;
 import com.rostrade.foodwagon.foodwagon.ProductListItemClickListener;
 import com.rostrade.foodwagon.foodwagon.R;
 import com.rostrade.foodwagon.foodwagon.model.Product;
-import com.rostrade.foodwagon.foodwagon.utility.Utility;
+import com.rostrade.foodwagon.foodwagon.utils.Utility;
 import com.rostrade.foodwagon.foodwagon.utils.DownloadImageTarget;
-import com.rostrade.foodwagon.foodwagon.view.DialogManager;
+import com.rostrade.foodwagon.foodwagon.utils.DialogManager;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -60,7 +59,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         final Product currentProduct = mProducts.get(position);
-        final File productImagePath = mUtility.getProductImage(currentProduct);
+        final File productImageFile = mUtility.getProductImage(currentProduct);
 
         if (position % 2 == 0) {
             holder.rowView.setBackgroundColor(mContext.getResources()
@@ -73,20 +72,16 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         holder.productDescription.setText(currentProduct.getDescription());
         holder.productPrice.setText(mUtility.getRoubleSign(String.valueOf(currentProduct.getPrice())));
 
-        if (productImagePath.exists()) {
-            mPicasso.load(productImagePath)
-                    .fit()
+        if (productImageFile.exists()) {
+            mPicasso.load(productImageFile)
                     .into(holder.productImage);
         } else {
             holder.productImage.setImageBitmap(null);
             mPicasso.load(currentProduct.getImageUrl())
-                    .into(new DownloadImageTarget(productImagePath.getAbsolutePath(),
+                    .into(new DownloadImageTarget(productImageFile.getAbsolutePath(),
                             new DownloadImageTarget.Callback() {
                                 @Override
                                 public void onImageSaved(String filePath) {
-                                    mPicasso.load(productImagePath)
-                                            .fit()
-                                            .into(holder.productImage);
                                     notifyItemChanged(position);
                                 }
                             }));

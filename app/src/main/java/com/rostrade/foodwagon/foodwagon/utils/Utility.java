@@ -1,11 +1,10 @@
-package com.rostrade.foodwagon.foodwagon.utility;
+package com.rostrade.foodwagon.foodwagon.utils;
 
 import android.content.Context;
 import android.graphics.Typeface;
 import android.text.SpannableStringBuilder;
 
 import com.rostrade.foodwagon.foodwagon.model.Product;
-import com.rostrade.foodwagon.foodwagon.view.RoubleSpan;
 
 import java.io.File;
 

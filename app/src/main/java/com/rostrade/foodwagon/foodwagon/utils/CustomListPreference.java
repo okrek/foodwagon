@@ -1,4 +1,4 @@
-package com.rostrade.foodwagon.foodwagon.utility;
+package com.rostrade.foodwagon.foodwagon.utils;
 
 
 import android.content.Context;

@@ -13,7 +13,7 @@ public interface IDrawerPresenter {
 
     void onCartClicked();
 
-    void onCreate();
+    void onDrawerRequested();
 
     void onMenuInflated();
 }

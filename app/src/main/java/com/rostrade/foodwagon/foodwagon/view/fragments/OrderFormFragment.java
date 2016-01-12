@@ -1,4 +1,4 @@
-package com.rostrade.foodwagon.foodwagon.view;
+package com.rostrade.foodwagon.foodwagon.view.fragments;
 
 import android.app.Fragment;
 import android.os.Bundle;

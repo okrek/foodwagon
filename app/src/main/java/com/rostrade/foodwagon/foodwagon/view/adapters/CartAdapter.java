@@ -12,7 +12,7 @@ import com.rostrade.foodwagon.foodwagon.CartItemClickListener;
 import com.rostrade.foodwagon.foodwagon.R;
 import com.rostrade.foodwagon.foodwagon.model.Cart;
 import com.rostrade.foodwagon.foodwagon.model.OrderItem;
-import com.rostrade.foodwagon.foodwagon.utility.Utility;
+import com.rostrade.foodwagon.foodwagon.utils.Utility;
 
 import java.util.List;
 

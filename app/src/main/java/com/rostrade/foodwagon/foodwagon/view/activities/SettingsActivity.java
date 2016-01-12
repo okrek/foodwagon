@@ -1,4 +1,4 @@
-package com.rostrade.foodwagon.foodwagon.view;
+package com.rostrade.foodwagon.foodwagon.view.activities;
 
 import android.os.Bundle;
 import android.preference.ListPreference;

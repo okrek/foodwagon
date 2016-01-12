@@ -20,7 +20,7 @@
         android:paddingLeft="16dp"
         android:paddingRight="16dp">
 
-        <com.rostrade.foodwagon.foodwagon.view.RobotoTextView
+        <com.rostrade.foodwagon.foodwagon.utils.RobotoTextView
             android:id="@+id/total"
             android:layout_height="wrap_content"
             android:layout_weight="1.1"
@@ -40,7 +40,7 @@
             android:background="@drawable/edit_text_background"
             android:visibility="invisible" />
 
-        <com.rostrade.foodwagon.foodwagon.view.RobotoTextView
+        <com.rostrade.foodwagon.foodwagon.utils.RobotoTextView
             android:id="@+id/cart_total"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

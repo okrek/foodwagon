@@ -1,4 +1,4 @@
-package com.rostrade.foodwagon.foodwagon.view;
+package com.rostrade.foodwagon.foodwagon.view.fragments;
 
 
 import android.app.Fragment;
@@ -25,7 +25,9 @@ import com.rostrade.foodwagon.foodwagon.model.OrderItem;
 import com.rostrade.foodwagon.foodwagon.model.Product;
 import com.rostrade.foodwagon.foodwagon.presenter.ICartPresenter;
 import com.rostrade.foodwagon.foodwagon.presenter.impl.CartPresenter;
-import com.rostrade.foodwagon.foodwagon.utility.Utility;
+import com.rostrade.foodwagon.foodwagon.utils.Utility;
+import com.rostrade.foodwagon.foodwagon.utils.DialogManager;
+import com.rostrade.foodwagon.foodwagon.view.ICartView;
 import com.rostrade.foodwagon.foodwagon.view.adapters.CartAdapter;
 
 import butterknife.Bind;

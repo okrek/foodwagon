@@ -12,24 +12,20 @@ import com.rostrade.foodwagon.foodwagon.model.Category;
 import com.rostrade.foodwagon.foodwagon.model.NavigationCategory;
 import com.rostrade.foodwagon.foodwagon.model.Product;
 import com.rostrade.foodwagon.foodwagon.model.ProductCategory;
-import com.rostrade.foodwagon.foodwagon.network.services.FoodWagonService;
 import com.rostrade.foodwagon.foodwagon.presenter.IProductListPresenter;
 import com.rostrade.foodwagon.foodwagon.view.IProductListView;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import de.greenrobot.event.EventBus;
 import rx.Observable;
-import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.functions.Func0;
 import rx.functions.Func1;
 import rx.functions.Func2;
 import rx.schedulers.Schedulers;
-import timber.log.Timber;
 
 /**
  * Created by frankie on 09.01.2016.
@@ -37,12 +33,11 @@ import timber.log.Timber;
 public class ProductListPresenter extends BasePresenter<IProductListView> implements IProductListPresenter {
 
     private List<Product> searchableProducts;
-    Cart mCart;
+    private Category mCurrentSelectedCategory;
+    private Cart mCart;
 
-    EventBus mEventBus;
-
-    Category mCurrentSelectedCategory;
-    SharedPreferences mSharedPreferences;
+    private EventBus mEventBus;
+    private SharedPreferences mSharedPreferences;
 
     public ProductListPresenter(IProductListView iView) {
         super(iView);
@@ -64,40 +59,6 @@ public class ProductListPresenter extends BasePresenter<IProductListView> implem
                 mSharedPreferences.getString(Constants.PREFS_KEY_DEFAULT_CATEGORY,
                         Constants.PREFS_DEFAULT_CATEGORY_VALUE);
         mCurrentSelectedCategory = new ProductCategory(null, Integer.parseInt(defaultCategoryId));
-
-        final FoodWagonService fws = new FoodWagonService();
-
-        Observable.interval(1, TimeUnit.SECONDS)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .take(10)
-                .flatMap(new Func1<Long, Observable<List<Product>>>() {
-                    @Override
-                    public Observable<List<Product>> call(Long aLong) {
-                        Timber.d(String.valueOf(aLong));
-                        return fws.fetchProductsForCategory("16");
-                    }
-                }).takeUntil(new Func1<List<Product>, Boolean>() {
-            @Override
-            public Boolean call(List<Product> products) {
-                return null;
-            }
-        }).subscribe(new Subscriber<List<Product>>() {
-            @Override
-            public void onCompleted() {
-
-            }
-
-            @Override
-            public void onError(Throwable e) {
-
-            }
-
-            @Override
-            public void onNext(List<Product> products) {
-                Timber.d(products.toArray().toString());
-            }
-        });
     }
 
     @Override

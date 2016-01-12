@@ -25,7 +25,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".view.SplashScreenActivity"
+            android:name=".view.activities.SplashScreenActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -35,34 +35,34 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".view.CartActivity"
+            android:name=".view.activities.CartActivity"
             android:label="@string/title_activity_cart"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".view.DrawerActivity"/>
+                android:value=".view.activities.DrawerActivity"/>
         </activity>
         <activity
-            android:name=".view.SettingsActivity"
+            android:name=".view.activities.SettingsActivity"
             android:label="@string/title_activity_settings"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".view.DrawerActivity"/>
+                android:value=".view.activities.DrawerActivity"/>
         </activity>
         <activity
-            android:name=".view.DrawerActivity"
+            android:name=".view.activities.DrawerActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:hardwareAccelerated="true">
         </activity>
         <activity
-            android:name=".view.ContactsActivity"
+            android:name=".view.activities.ContactsActivity"
             android:label="@string/title_activity_contacts"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".view.DrawerActivity"/>
+                android:value=".view.activities.DrawerActivity"/>
         </activity>
     </application>
 

@@ -9,7 +9,7 @@ import com.rostrade.foodwagon.foodwagon.model.Product;
 import com.rostrade.foodwagon.foodwagon.model.ProductCategory;
 import com.rostrade.foodwagon.foodwagon.network.services.FoodWagonService;
 import com.rostrade.foodwagon.foodwagon.presenter.ISplashScreenPresenter;
-import com.rostrade.foodwagon.foodwagon.utility.NetworkHelper;
+import com.rostrade.foodwagon.foodwagon.utils.NetworkHelper;
 import com.rostrade.foodwagon.foodwagon.view.ISplashActivityView;
 
 import java.util.List;
@@ -19,6 +19,7 @@ import javax.inject.Inject;
 
 import rx.Observable;
 import rx.Subscriber;
+import rx.functions.Action1;
 import rx.functions.Func1;
 
 /**
@@ -87,7 +88,14 @@ public class SplashScreenPresenter extends BasePresenter<ISplashActivityView> im
                     public Observable<List<Product>> call(ProductCategory productCategory) {
                         return mFoodWagonService.fetchProductsForCategory(String.valueOf(productCategory.getId()));
                     }
-                }).subscribe(new Subscriber<List<Product>>() {
+                })
+               .doOnNext(new Action1<List<Product>>() {
+                   @Override
+                   public void call(List<Product> products) {
+                        progress.incrementAndGet();
+                   }
+               })
+                .subscribe(new Subscriber<List<Product>>() {
             @Override
             public void onCompleted() {
                 SharedPreferences.Editor editor = mSharedPreferences.edit();

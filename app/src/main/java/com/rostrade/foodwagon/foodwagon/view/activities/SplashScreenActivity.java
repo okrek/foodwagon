@@ -1,4 +1,4 @@
-package com.rostrade.foodwagon.foodwagon.view;
+package com.rostrade.foodwagon.foodwagon.view.activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,6 +10,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.rostrade.foodwagon.foodwagon.R;
 import com.rostrade.foodwagon.foodwagon.presenter.ISplashScreenPresenter;
 import com.rostrade.foodwagon.foodwagon.presenter.impl.SplashScreenPresenter;
+import com.rostrade.foodwagon.foodwagon.view.ISplashActivityView;
 
 public class SplashScreenActivity extends AppCompatActivity implements ISplashActivityView {
 

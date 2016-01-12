@@ -24,14 +24,55 @@ import rx.functions.Action1;
  */
 public class DrawerPresenter extends BasePresenter<IDrawerActivityView> implements IDrawerPresenter {
 
+
+    private Cart mCart;
+
     private EventBus mEventBus;
     private SharedPreferences mSharedPreferences;
 
-    private List<Category> mCategories;
-    private Cart mCart;
-
     public DrawerPresenter(IDrawerActivityView iView) {
         super(iView);
+    }
+
+    @Override
+    public void init() {
+        mEventBus = EventBus.getDefault();
+
+        mSharedPreferences = ((FoodWagonApp) getView().getContext())
+                .getApplicationComponent().provideSharedPreferences();
+
+        mCart = Cart.getInstance();
+        mCart.getSubject()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<Cart>() {
+                    @Override
+                    public void call(Cart cart) {
+                        getView().showCartBadge(cart.getItemCount());
+                    }
+                });
+    }
+
+    @Override
+    public void onMenuInflated() {
+        getView().showCartBadge(mCart.getItemCount());
+    }
+
+    @Override
+    public void onDrawerRequested() {
+        int defaultCategoryId = Integer.parseInt(mSharedPreferences.getString(Constants.PREFS_KEY_DEFAULT_CATEGORY,
+                Constants.PREFS_DEFAULT_CATEGORY_VALUE));
+        List<Category> categories = DBFlowManager.getCategories();
+        getView().buildDrawer(categories);
+
+        if (defaultCategoryId == Constants.FAVORITES_CATEGORY_ID) {
+            getView().selectDrawerItemForCategory(NavigationCategory.FAVORITES);
+        } else {
+            for (Category category : categories) {
+                if (category.getId() == defaultCategoryId) {
+                    getView().selectDrawerItemForCategory(category);
+                }
+            }
+        }
     }
 
     @Override
@@ -53,56 +94,10 @@ public class DrawerPresenter extends BasePresenter<IDrawerActivityView> implemen
         }
     }
 
+
     @Override
     public void onCartClicked() {
         getView().showCart();
     }
 
-    @Override
-    public void onCreate() {
-        int defaultCategoryId = Integer.parseInt(mSharedPreferences.getString(Constants.PREFS_KEY_DEFAULT_CATEGORY,
-                Constants.PREFS_DEFAULT_CATEGORY_VALUE));
-        List<Category> categories = DBFlowManager.getCategories();
-        getView().buildDrawer(categories);
-
-        if (defaultCategoryId == Constants.FAVORITES_CATEGORY_ID) {
-            getView().selectDrawerItemForCategory(NavigationCategory.FAVORITES);
-        } else {
-            for (Category category : categories) {
-                if (category.getId() == defaultCategoryId) {
-                    getView().selectDrawerItemForCategory(category);
-                }
-            }
-        }
-    }
-
-    @Override
-    public void onMenuInflated() {
-        getView().showCartBadge(mCart.getItemCount());
-    }
-
-    @Override
-    public void init() {
-        mEventBus = EventBus.getDefault();
-
-        mSharedPreferences = ((FoodWagonApp) getView().getContext())
-                .getApplicationComponent().provideSharedPreferences();
-
-        mCategories = DBFlowManager.getCategories();
-        mCart = Cart.getInstance();
-        mCart.getSubject()
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<Cart>() {
-                    @Override
-                    public void call(Cart cart) {
-                        getView().showCartBadge(cart.getItemCount());
-                    }
-                });
-    }
-
-
-    @Override
-    public void onViewDetached() {
-
-    }
 }

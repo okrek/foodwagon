@@ -1,4 +1,4 @@
-package com.rostrade.foodwagon.foodwagon.view;
+package com.rostrade.foodwagon.foodwagon.view.activities;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 
 import com.rostrade.foodwagon.foodwagon.R;
+import com.rostrade.foodwagon.foodwagon.view.fragments.CartFragment;
+import com.rostrade.foodwagon.foodwagon.view.fragments.OrderFormFragment;
 
 
 public class CartActivity extends AppCompatActivity implements View.OnClickListener {

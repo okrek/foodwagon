@@ -1,4 +1,4 @@
-package com.rostrade.foodwagon.foodwagon.view;
+package com.rostrade.foodwagon.foodwagon.view.activities;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -35,11 +35,6 @@ public class ContactsActivity extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        phoneNumber.setText(R.string.company_phone_number);
-        addressText.setText(R.string.company_address);
-        websiteTextView.setText(R.string.company_url);
-        emailTextView.setText(R.string.company_email);
     }
 
     @Override

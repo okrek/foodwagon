@@ -4,7 +4,7 @@
         android:title="Автоматическое обновление"
         android:defaultValue="false"
         android:key="autoUpdate"/>
-    <com.rostrade.foodwagon.foodwagon.utility.CustomListPreference
+    <com.rostrade.foodwagon.foodwagon.utils.CustomListPreference
         android:negativeButtonText="@string/cancel"
         android:title="Начальный экран"
         android:key="defaultCategory"
