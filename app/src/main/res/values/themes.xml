@@ -12,5 +12,14 @@
         <item name="windowActionModeOverlay">true</item>
         <item name="actionModeBackground">@drawable/action_mode_background</item>
         <item name="android:windowBackground">@color/color_background</item>
+        <!--<item name="android:dialogTheme">@style/DialogStyle</item>-->
+        <!--<item name="android:alertDialogTheme">@style/DialogStyle</item>-->
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay.Material</item>
+        <!-- Default preference icon tint color. -->
+        <!--<item name="preferenceTint">@color/accent_state_list</item>-->
+    </style>
+
+    <style name="DialogStyle" parent="Theme.AppCompat.Dialog.Alert">
+        <item name="colorAccent">@color/color_accent</item>
     </style>
 </resources>

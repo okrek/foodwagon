@@ -1,6 +1,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.rostrade.foodwagon.foodwagon.ui.CartActivity">
+    tools:context="com.rostrade.foodwagon.foodwagon.view.CartActivity">
 
     <item
         android:id="@+id/clear_cart"

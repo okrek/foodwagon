@@ -33,13 +33,12 @@ public class CustomListPreference extends ListPreference {
                 .icon(getDialogIcon())
                 .backgroundColor(context.getResources().getColor(R.color.color_background))
                 .titleColor(context.getResources().getColor(R.color.white_text))
-                .itemColorRes(R.color.white_text)
+                .itemsColorRes(R.color.white_text)
                 .negativeText(getNegativeButtonText())
                 .items(getEntries())
-                .itemsCallbackSingleChoice(preselect, new MaterialDialog.ListCallback() {
+                .itemsCallbackSingleChoice(preselect, new MaterialDialog.ListCallbackSingleChoice() {
                     @Override
-                    public void onSelection(MaterialDialog dialog, View itemView,
-                                            int which, CharSequence text) {
+                    public boolean onSelection(MaterialDialog dialog, View itemView, int which, CharSequence text) {
                         onClick(null, DialogInterface.BUTTON_POSITIVE);
                         dialog.dismiss();
 
@@ -48,6 +47,7 @@ public class CustomListPreference extends ListPreference {
                             if (callChangeListener(value))
                                 setValue(value);
                         }
+                        return true;
                     }
                 });
 

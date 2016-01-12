@@ -1,7 +1,7 @@
 <resources>
-    <style name="PreferenceScreen" parent="AppTheme.Base">
-        <item name="android:textColor">@color/white_text</item>
-    </style>
+    <!--<style name="PreferenceScreen" parent="AppTheme.Base">-->
+        <!--<item name="android:textColor">@color/white_text</item>-->
+    <!--</style>-->
 
     <style name="CustomPopupMenu" parent="Base.ThemeOverlay.AppCompat.Dark">
         <item name="android:background">@color/color_background</item>

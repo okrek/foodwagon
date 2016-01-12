@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <color name="white">#FFFFFF</color>
+
     <color name="color_primary">#2e2e3b</color>
     <color name="color_primary_dark">#24242e</color>
     <color name="color_accent">#E64A19</color>
@@ -13,6 +16,7 @@
     <color name="drawer_background">#FFFFFF</color>
     <color name="drawer_text_color">#000000</color>
     <color name="drawer_item_selector">#1F000000</color>
+    <color name="material_drawer_selected_text">#DE000000</color>
 
     <!-- Flat Button -->
     <color name="flat_pressed">#E5E5E5</color>
@@ -26,4 +30,5 @@
     <color name="white_text">#FFFFFF</color>
     <color name="hint_white_text">#A6FFFFFF</color>
     <color name="badge_color_red">#CC0000</color>
+
 </resources>

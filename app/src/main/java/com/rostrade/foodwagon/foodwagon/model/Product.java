@@ -1,67 +1,54 @@
 package com.rostrade.foodwagon.foodwagon.model;
 
-import android.support.annotation.NonNull;
+import com.google.gson.annotations.SerializedName;
+import com.raizlabs.android.dbflow.annotation.Column;
+import com.raizlabs.android.dbflow.annotation.ModelContainer;
+import com.raizlabs.android.dbflow.annotation.PrimaryKey;
+import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.sql.language.SQLite;
+import com.raizlabs.android.dbflow.structure.BaseModel;
+import com.rostrade.foodwagon.foodwagon.database.FoodWagonDatabase;
 
-import java.util.ArrayList;
-import java.util.List;
+@ModelContainer
+@Table(database = FoodWagonDatabase.class)
+public class Product extends BaseModel {
 
-public class Product implements Comparable<Product> {
+    @Column
+    @SerializedName("name") String mName;
+    @Column String mDescription;
+    @Column String mImageUrl;
+    @Column String mPrice;
+    @Column String mWeight;
 
-    private String mName;
-    private String mDescription;
-    private String mImageUrl;
-    private String mPrice;
-    private String mWeight;
-    private String mId;
-    private String mCategory;
-    private boolean mIsFavorite = false;
-    private List<Modification> modifications;
-    private Modification selectedModification;
+    @PrimaryKey
+    @SerializedName("id") String mId;
 
-    /**
-     * Toggles favorite state on call
-     */
-    public void favoriteToggle() {
-        setFavorite(isFavorite() ? false : true);
-    }
+    @Column String mCategory;
+    @Column boolean mIsFavorite = false;
+
+    boolean isFromJson;
 
     @Override
-    public int compareTo(@NonNull Product another) {
-        int result = 0;
-        if (this.getSelectedModificationId()!= null && another.getSelectedModificationId() != null) {
-            result = this.getSelectedModificationId().compareTo(another.getSelectedModificationId());
-        }
-        if (result != 0) return result;
+    public void save() {
+        if (!isFromJson()) {
+            super.save();
+        } else {
+            Product product = SQLite.select()
+                    .from(Product.class)
+                    .where(Product_Table.mId.eq(mId))
+                    .querySingle();
 
-        return this.getId().compareTo(another.getId());
-    }
-
-    public boolean hasModifications() {
-        return modifications != null && modifications.size() > 1;
-    }
-
-    public List<Modification> getModifications() {
-        if (modifications == null) modifications = new ArrayList<>();
-        return modifications;
-    }
-
-    public String getSelectedModificationId() {
-        if (selectedModification != null) return selectedModification.getModId();
-        return null;
-    }
-
-    public Modification getSelectedModification() {
-        return selectedModification;
-    }
-
-    public Modification getModificationById(String id) {
-        if (modifications != null) {
-            for (Modification modification : modifications) {
-                if (modification.getModId().equals(id)) return modification;
+            if (product != null) {
+                setFavorite(product.isFavorite());
             }
-        }
 
-        return null;
+            super.save();
+        }
+    }
+
+    public void toggleFavorite() {
+        setFavorite(!isFavorite());
+        save();
     }
 
     public String getImageUrl() {
@@ -108,14 +95,6 @@ public class Product implements Comparable<Product> {
         this.mCategory = category;
     }
 
-    public void setSelectedModification(Modification selectedModification) {
-        this.selectedModification = selectedModification;
-    }
-
-    public void setModifications(List<Modification> modifications) {
-        this.modifications = modifications;
-    }
-
     public String getDescription() {
         return mDescription;
     }
@@ -136,20 +115,30 @@ public class Product implements Comparable<Product> {
         this.mIsFavorite = isFavorite;
     }
 
+    public boolean isFromJson() {
+        return isFromJson;
+    }
+
+    public void setFromJson(boolean fromJson) {
+        isFromJson = fromJson;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
         Product product = (Product) o;
-        return getSelectedModificationId().equals(product.getSelectedModificationId())
-                && getId().equals(product.getId());
+
+        if (mName != null ? !mName.equals(product.mName) : product.mName != null) return false;
+        return !(mId != null ? !mId.equals(product.mId) : product.mId != null);
+
     }
 
     @Override
     public int hashCode() {
-        int result = getId().hashCode();
-        result = 31 * result + getSelectedModificationId().hashCode();
+        int result = mName != null ? mName.hashCode() : 0;
+        result = 31 * result + (mId != null ? mId.hashCode() : 0);
         return result;
     }
 }

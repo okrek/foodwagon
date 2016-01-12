@@ -3,16 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/action_search"
-        android:title="@string/search"
-        android:queryHint="@string/search_hint"
-        android:icon="@drawable/abc_ic_search_api_mtrl_alpha"
-        app:actionViewClass="android.support.v7.widget.SearchView"
-        app:showAsAction="ifRoom|collapseActionView" />
-    <item
         android:id="@+id/action_cart"
         android:title="@string/cart"
         android:icon="@drawable/ic_shopping_basket_white_24dp"
+        android:orderInCategory="200"
         app:actionLayout="@layout/menu_badge"
         app:showAsAction="always"
         tools:ignore="AlwaysShowAction" />

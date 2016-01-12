@@ -58,27 +58,11 @@ public class Order {
                 JSONObject jsonProduct = new JSONObject();
                 jsonProduct.put("count", getOrderItems().get(product));
                 jsonProduct.put("name", product.getName());
-
-                if (product.getSelectedModification() == null) {
-                    jsonProduct.put("description", "");
-                    jsonProduct.put("mod_id", 0);
-                } else {
-                    jsonProduct.put("description", product.getSelectedModification().getModName()
-                            + " : " + product.getSelectedModification().getModValue());
-                    jsonProduct.put("mod_id", Integer.parseInt(product.getSelectedModificationId()));
-                }
+                jsonProduct.put("description", "");
 
                 jsonProduct.put("img", product.getImageUrl());
                 jsonProduct.put("cost", product.getPrice());
                 jsonProduct.put("price", getTotalCostForProduct(product));
-
-                if (product.getSelectedModification() == null) {
-                    cartItems.put(product.getId(), jsonProduct);
-                } else {
-                    cartItems.put(product.getId() + "_"
-                            + product.getSelectedModificationId(), jsonProduct);
-                }
-
             }
 
             jsonOrder.put("items", cartItems);
