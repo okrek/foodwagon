@@ -14,7 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.rostrade.foodwagon.foodwagon.ProductListItemClickListener;
+import com.rostrade.foodwagon.foodwagon.listeners.ProductListItemClickListener;
 import com.rostrade.foodwagon.foodwagon.R;
 import com.rostrade.foodwagon.foodwagon.model.Product;
 import com.rostrade.foodwagon.foodwagon.presenter.IProductListPresenter;
@@ -26,19 +26,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainFragment extends Fragment implements IProductListView, ProductListItemClickListener<Product> {
+public class ProductListFragment extends Fragment implements IProductListView, ProductListItemClickListener<Product> {
 
     private ProductListAdapter adapter;
     private IProductListPresenter presenter;
 
     private SearchView mSearchView;
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        setRetainInstance(true);
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

@@ -13,8 +13,7 @@ import com.rostrade.foodwagon.foodwagon.database.FoodWagonDatabase;
 @Table(database = FoodWagonDatabase.class)
 public class Product extends BaseModel {
 
-    @Column
-    @SerializedName("name") String mName;
+    @Column String mName;
     @Column String mDescription;
     @Column String mImageUrl;
     @Column String mPrice;

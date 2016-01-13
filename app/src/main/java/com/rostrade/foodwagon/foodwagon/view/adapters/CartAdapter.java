@@ -8,7 +8,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.rostrade.foodwagon.foodwagon.CartItemClickListener;
+import com.rostrade.foodwagon.foodwagon.listeners.CartItemClickListener;
 import com.rostrade.foodwagon.foodwagon.R;
 import com.rostrade.foodwagon.foodwagon.model.Cart;
 import com.rostrade.foodwagon.foodwagon.model.OrderItem;

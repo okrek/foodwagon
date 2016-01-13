@@ -11,10 +11,10 @@ public interface IPresenter<V extends IView> {
 
     void detachView();
 
-    void init();
-
     void onViewAttached(V view);
 
     void onViewDetached();
+
+    void init();
 
 }

@@ -17,14 +17,7 @@ public class CartPresenter extends BasePresenter<ICartView> implements ICartPres
     }
 
     @Override
-    public void onRemoveItemClicked(OrderItem orderItem, int position) {
-        mCart.removeItem(orderItem);
-        getView().showCartContentWithItemChange(mCart, position);
-    }
-
-    @Override
     public void init() {
-
         mCart = Cart.getInstance();
     }
 
@@ -36,6 +29,12 @@ public class CartPresenter extends BasePresenter<ICartView> implements ICartPres
     @Override
     public void onItemClicked(OrderItem orderItem) {
         getView().showDetailsDialog(orderItem);
+    }
+
+    @Override
+    public void onRemoveItemClicked(OrderItem orderItem, int position) {
+        mCart.removeItem(orderItem);
+        getView().showCartContentWithItemChange(mCart, position);
     }
 
     @Override

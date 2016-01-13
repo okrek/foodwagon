@@ -19,7 +19,7 @@ import com.rostrade.foodwagon.foodwagon.model.Category;
 import com.rostrade.foodwagon.foodwagon.presenter.IDrawerPresenter;
 import com.rostrade.foodwagon.foodwagon.presenter.impl.DrawerPresenter;
 import com.rostrade.foodwagon.foodwagon.view.IDrawerActivityView;
-import com.rostrade.foodwagon.foodwagon.view.fragments.MainFragment;
+import com.rostrade.foodwagon.foodwagon.view.fragments.ProductListFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,11 +30,12 @@ import butterknife.ButterKnife;
 // TODO: restyle toolbar, add onDismiss in splashScreenActivity
 public class DrawerActivity extends BaseActivity implements IDrawerActivityView {
 
-    private IDrawerPresenter presenter;
-
     @Bind(R.id.toolbar) Toolbar toolbar;
+
     private TextView mBasketBadge;
     private Drawer mDrawer;
+
+    private IDrawerPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,11 +46,12 @@ public class DrawerActivity extends BaseActivity implements IDrawerActivityView 
 
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction()
-                    .add(R.id.container, new MainFragment())
+                    .add(R.id.container, new ProductListFragment())
                     .commit();
         }
 
         setSupportActionBar(toolbar);
+
         presenter = new DrawerPresenter(this);
         presenter.onDrawerRequested();
     }
@@ -60,7 +62,6 @@ public class DrawerActivity extends BaseActivity implements IDrawerActivityView 
 
         View cartItem = menu.findItem(R.id.action_cart).getActionView();
         mBasketBadge = (TextView) cartItem.findViewById(R.id.menu_badge_text);
-
         cartItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

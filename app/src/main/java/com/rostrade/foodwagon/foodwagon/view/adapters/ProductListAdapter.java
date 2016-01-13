@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.rostrade.foodwagon.foodwagon.ProductListItemClickListener;
+import com.rostrade.foodwagon.foodwagon.listeners.ProductListItemClickListener;
 import com.rostrade.foodwagon.foodwagon.R;
 import com.rostrade.foodwagon.foodwagon.model.Product;
 import com.rostrade.foodwagon.foodwagon.utils.Utility;
@@ -36,9 +36,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         this.mContext = context;
 
         mUtility = Utility.getInstance(mContext);
-        mPicasso = new Picasso.Builder(mContext)
-                .executor(Executors.newSingleThreadExecutor())
-                .build();
+        mPicasso = Picasso.with(mContext);
     }
 
 
@@ -82,7 +80,9 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
                             new DownloadImageTarget.Callback() {
                                 @Override
                                 public void onImageSaved(String filePath) {
-                                    notifyItemChanged(position);
+                                    File f = new File(filePath);
+                                    mPicasso.invalidate(filePath);
+                                   mPicasso.load(f).into(holder.productImage);
                                 }
                             }));
         }

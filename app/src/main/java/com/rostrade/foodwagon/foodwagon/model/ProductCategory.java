@@ -31,12 +31,12 @@ public class ProductCategory extends BaseModel implements Category {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     @Override
     public String getName() {
         return name;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

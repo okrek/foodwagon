@@ -18,7 +18,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.rostrade.foodwagon.foodwagon.CartItemClickListener;
+import com.rostrade.foodwagon.foodwagon.listeners.CartItemClickListener;
 import com.rostrade.foodwagon.foodwagon.R;
 import com.rostrade.foodwagon.foodwagon.model.Cart;
 import com.rostrade.foodwagon.foodwagon.model.OrderItem;
